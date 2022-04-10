@@ -1,0 +1,30 @@
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import numpy as np
+import cv2
+def LZW_encode(uncompressed):
+ 
+    # Build the dictionary.
+    #only big letters 
+    dict_size = 26
+    dictionary = {chr(i+ord('A')): i for i in range(dict_size)}
+ 
+    p = ""
+    output = []
+    for c in uncompressed:
+        temp = p + c
+        if temp in dictionary:
+            p = temp
+        else:
+            output.append(dictionary[p])
+            # Add temp to the dictionary.
+            dictionary[temp] = dict_size
+            dict_size += 1
+            p = c
+ 
+    # Output the code for w.
+    if len(p):
+        output.append(dictionary[p])
+    return output
+def inttochar(z):
+    return chr((z//10)+65)
