@@ -2,8 +2,10 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 import cv2
+def inttochar(z):
+    return chr((z//10)+65)
 def LZW_encode(uncompressed):
- 
+    uncompressed = [inttochar(x) for x in list(uncompressed)]
     # Build the dictionary.
     #only big letters 
     dict_size = 26
@@ -26,5 +28,3 @@ def LZW_encode(uncompressed):
     if len(p):
         output.append(dictionary[p])
     return output
-def inttochar(z):
-    return chr((z//10)+65)
